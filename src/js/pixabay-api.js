@@ -5,28 +5,26 @@ import 'izitoast/dist/css/iziToast.min.css';
 
 const input = document.querySelector('#searchImg');
 const btn = document.querySelector('#searchBtn');
+const listImages = document.querySelector('.listImages');
 
 btn.addEventListener('click', e => {
   e.preventDefault();
-  if (checkInput()) {
-    fetchImages()
-      .then(photo => renderUsers(photo))
-      .catch(error => console.log(error));
-  }
+  clearImages();
+  fetchImages()
+    .then(photos => {
+      if (photos.hits.length === 0) {
+        iziToast.error({
+          timeout: 3000,
+          position: 'topRight',
+          message:
+            'Sorry, there are no images matching your search query. Please try again!',
+        });
+      } else {
+        imgList(photos.hits);
+      }
+    })
+    .catch(error => console.log(error));
 });
-
-function checkInput() {
-  if (input.value === '') {
-    return iziToast.error({
-      timeout: 3000,
-      position: 'topRight',
-      message:
-        'Sorry, there are no images matching your search query. Please try again!',
-    });
-    return false;
-  }
-  return true;
-}
 
 function fetchImages() {
   const searchParams = new URLSearchParams({
@@ -43,9 +41,24 @@ function fetchImages() {
     return response.json();
   });
 }
+function imgList(photos) {
+  const markup = photos
+    .map(photo => {
+      return `<li>
+        <img src="${photo.webformatURL}" alt="${photo.tags}" style="width:360px; height:200px;"/>
+        <div class="descr-wrapper">
+        <p class="descr"><b>Tags</b>: ${photo.tags}</p>
+        <p class="descr"><b>Likes</b>: ${photo.likes}</p>
+        <p class="descr"><b>Views</b>: ${photo.views}</p>
+        <p class="descr"><b>Comments</b>: ${photo.comments}</p>
+        <p class="descr"><b>Downloads</b>: ${photo.downloads}</p>
+        </div>
+      </li>`;
+    })
+    .join('');
 
-function renderUsers(photo) {
-  // Функція для відображення отриманих фотографій
-  console.log(photo);
-  // Реалізуй тут логіку для відображення фотографій
+  listImages.insertAdjacentHTML('beforeend', markup);
+}
+function clearImages() {
+  listImages.innerHTML = '';
 }
