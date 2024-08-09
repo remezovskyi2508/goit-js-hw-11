@@ -36,7 +36,12 @@ body {
   display: flex;
   margin: 0 auto;
   justify-content: center;
-  padding: 36px 0;
+}
+
+.container{
+  padding: 36px 20px;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 .wrapper {
@@ -49,6 +54,7 @@ body {
   max-width: 371px;
   display: flex;
   align-items: center;
+  margin: 0 auto;
 }
 #searchImg {
   height: 40px;
@@ -83,14 +89,42 @@ body {
   }
 }
 
-.listImages {
+.list-images {
   margin-top: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
 }
 
-.descr-wrapper{
-  display: flex;
+.img-item{
+  width: 360px;
+  height: 200px;
 }
 
-.descr{
+.photo-item {
+  height: fit-content;
+  position: relative;
+  border: 1px solid #808080;
+  border-width: 0px 1px 1px 1px;
+  box-sizing: border-box;
+}
+
+.descr-wrapper {
   display: flex;
+  justify-content: space-around;
+  padding: 4px 20px;
+}
+
+.descr {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 12px;
+}
+
+span {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
 }

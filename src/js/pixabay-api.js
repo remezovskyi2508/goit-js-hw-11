@@ -2,10 +2,13 @@
 import iziToast from 'izitoast';
 // Додатковий імпорт стилів
 import 'izitoast/dist/css/iziToast.min.css';
+// Описаний у документації
+import {imgList, clearImages} from './render-functions';
+
 
 const input = document.querySelector('#searchImg');
 const btn = document.querySelector('#searchBtn');
-const listImages = document.querySelector('.listImages');
+
 
 btn.addEventListener('click', e => {
   e.preventDefault();
@@ -41,24 +44,5 @@ function fetchImages() {
     return response.json();
   });
 }
-function imgList(photos) {
-  const markup = photos
-    .map(photo => {
-      return `<li>
-        <img src="${photo.webformatURL}" alt="${photo.tags}" style="width:360px; height:200px;"/>
-        <div class="descr-wrapper">
-        <p class="descr"><b>Tags</b>: ${photo.tags}</p>
-        <p class="descr"><b>Likes</b>: ${photo.likes}</p>
-        <p class="descr"><b>Views</b>: ${photo.views}</p>
-        <p class="descr"><b>Comments</b>: ${photo.comments}</p>
-        <p class="descr"><b>Downloads</b>: ${photo.downloads}</p>
-        </div>
-      </li>`;
-    })
-    .join('');
 
-  listImages.insertAdjacentHTML('beforeend', markup);
-}
-function clearImages() {
-  listImages.innerHTML = '';
-}
+
