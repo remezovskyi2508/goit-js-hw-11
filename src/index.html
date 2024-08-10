@@ -9,13 +9,17 @@
   </head>
   <body>
     <div class="container">
-      <div class="wrapper">
-        <div class="input-wrapper">
-          <input type="text" id="searchImg" placeholder="Search image..." />
-          <button type="button" id="searchBtn">Search</button>
-        </div>
-        <ul class="list-images"></ul>
-      </div>
+      <form id="searchForm">
+        <input
+          type="text"
+          id="searchImg"
+          placeholder="Search image..."
+          required
+        />
+        <button type="submit">Search</button>
+      </form>
+      <ul class="list-images"></ul>
+      <span class="loader">Loading</span>
     </div>
 
     <script type="module" src="./main.js"></script>

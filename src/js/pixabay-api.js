@@ -1,9 +1,7 @@
-const input = document.querySelector('#searchImg');
-
-function fetchImages() {
+export default function fetchImages(input) {
   const searchParams = new URLSearchParams({
     key: '45320962-957458a2920d861910609dde6',
-    q: `${input.value}`,
+    q: `${input.value.trim()}`,
     image_type: 'photo',
     orientation: 'horizontal',
     safesearch: true,
@@ -15,4 +13,3 @@ function fetchImages() {
     return response.json();
   });
 }
-export default fetchImages;
