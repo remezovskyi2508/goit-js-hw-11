@@ -1,14 +1,4 @@
-import SimpleLightbox from 'simplelightbox';
-// Додатковий імпорт стилів
-import 'simplelightbox/dist/simple-lightbox.min.css';
-
-const listImages = document.querySelector('.list-images');
-
-new SimpleLightbox('.list-images a', {
-  close: true,
-});
-
-function imgList(photos) {
+export default function imgList(photos) {
   const markup = photos
     .map(photo => {
       return `<li class="photo-item">
@@ -22,12 +12,5 @@ function imgList(photos) {
       </li>`;
     })
     .join('');
-
-  listImages.insertAdjacentHTML('beforeend', markup);
+  return markup;
 }
-
-function clearImages() {
-  listImages.innerHTML = '';
-}
-
-export {imgList, clearImages};

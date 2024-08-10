@@ -1,33 +1,4 @@
-// Описаний у документації
-import iziToast from 'izitoast';
-// Додатковий імпорт стилів
-import 'izitoast/dist/css/iziToast.min.css';
-// Описаний у документації
-import {imgList, clearImages} from './render-functions';
-
-
 const input = document.querySelector('#searchImg');
-const btn = document.querySelector('#searchBtn');
-
-
-btn.addEventListener('click', e => {
-  e.preventDefault();
-  clearImages();
-  fetchImages()
-    .then(photos => {
-      if (photos.hits.length === 0) {
-        iziToast.error({
-          timeout: 3000,
-          position: 'topRight',
-          message:
-            'Sorry, there are no images matching your search query. Please try again!',
-        });
-      } else {
-        imgList(photos.hits);
-      }
-    })
-    .catch(error => console.log(error));
-});
 
 function fetchImages() {
   const searchParams = new URLSearchParams({
@@ -44,5 +15,4 @@ function fetchImages() {
     return response.json();
   });
 }
-
-
+export default fetchImages;
